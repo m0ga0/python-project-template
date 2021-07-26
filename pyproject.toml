@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "tox-poetry"
+version = "0.1.0"
+description = ""
+authors = ["mog <mo.gao@foxmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[[tool.poetry.source]]
+name = "tsinghua"
+url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
+default = true
+
+[tool.poetry.scripts]
+my-script = "tox_poetry.hello_world:main"

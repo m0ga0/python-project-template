@@ -1,0 +1,20 @@
+# virtualenv files, e.g. pyenv
+.python-version
+
+# packages
+sdist
+build
+dist
+
+# tests, coverages
+tests/
+*.pyc
+tests/
+__pycache__
+
+.pytest_cache
+.tox
+.coverage
+
+# other hidden files/dirs
+.*
