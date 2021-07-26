@@ -9,6 +9,10 @@ python = "^3.7"
 
 [tool.poetry.dev-dependencies]
 pytest = "^6.2.4"
+coverage = "^5.5"
+pre-commit = "^2.13.0"
+black = "^21.7b0"
+flake8 = "^3.9.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -20,4 +24,31 @@ url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
 default = true
 
 [tool.poetry.scripts]
-my-script = "tox_poetry.hello_world:main"
+hello = "tox_poetry.hello_world:main"
+
+[tool.black]
+line-length = 88
+#target-version = ['py37', 'py38']
+include = "\\.pyi?$"
+exclude = '''
+/(
+  \.toml
+  |\.lock
+  |\.sh
+  |\.git
+  |\.ini
+  |\.gitignore
+  |\.coveragerc
+  |\.coverage
+  |\.tox
+  |Dockerfile
+  |\.Dockerfile
+  |\.python-version
+  |\.rst
+  |\.pytest_cache
+  |dist
+  |build
+  |_build
+  |\.venv
+)/
+'''

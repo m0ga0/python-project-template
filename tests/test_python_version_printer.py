@@ -8,4 +8,3 @@ def test_print_python_version(mock_print):
     print_python_version()
 
     mock_print.assert_called_once()
-

@@ -5,16 +5,14 @@
 sdist
 build
 dist
+src/*/__pycache__
 
 # tests, coverages
-tests/
-*.pyc
-tests/
-__pycache__
+tests/*.pyc
+tests/__pycache__
 
 .pytest_cache
 .tox
 .coverage
 
 # other hidden files/dirs
-.*
