@@ -6,7 +6,7 @@ on:
     branches: [main]
 
 jobs:
-  main-pipeline:
+  tox:
     strategy:
       matrix:
         python-version: ['3.7','3.8']
@@ -20,4 +20,15 @@ jobs:
     - name: install tox
       run: python -m pip install --upgrade tox virtualenv setuptools pip poetry
     - name: run tox
-      run: tox
+      run: tox -e py
+  pre-commit:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+    - name: install pre-commit
+      run: python -m pip install --upgrade pre-commit && pre-commit install
+    - name: run pre-commit
+      run: pre-commit run --all-files --show-diff-on-failure
