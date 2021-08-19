@@ -1,6 +1,7 @@
 class HelloWorld:
     def __init__(self, a):
         print(f"hello world :{a}")
+        print(f"hi {a}")
 
 
 def main():
