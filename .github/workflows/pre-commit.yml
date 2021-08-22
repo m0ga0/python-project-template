@@ -41,8 +41,8 @@ jobs:
         python-version: '3.8'
     - name: generate report
       run:  |
-        PYTHONPATH=src python -m pip install coverage pytest
-        python -m coverage run --branch -m pytest
+        python -m pip install coverage pytest
+        PYTHONPATH=src python -m coverage run --branch -m pytest
     - name: upload to Codecov
       uses: codecov/codecov-action@v1
       with:
