@@ -32,6 +32,10 @@ jobs:
       run: python -m pip install --upgrade tox poetry
     - name: run coverage
       run: tox -e coverage
+    - name: upload report to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        fail_ci_if_error: true
   pre-commit:
     runs-on: ubuntu-latest
     steps:
