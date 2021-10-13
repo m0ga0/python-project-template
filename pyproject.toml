@@ -52,5 +52,6 @@ exclude = '''
   |build
   |_build
   |\.venv
+  |\docs/source/conf.py
 )/
 '''

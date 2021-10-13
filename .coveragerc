@@ -12,6 +12,8 @@ omit =
     .pre-commit-config.yaml
     # omit .flake8 config
     .flake8
+    .docs/build/*
+    .docs/source/config.py
 
 exclude_lines =
     if __name__ == .__main__.:
