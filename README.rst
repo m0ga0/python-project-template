@@ -2,19 +2,6 @@
 Overview
 ========
 
-This project is used as a python project / library template. It solves the problem that how we
-can quickly build a new business-oriented python project with modern python management tools or libs.
-The project provides below basic dev env tools:
-
-* python version and virtual env installation and management
-* python dependencies management
-* linting and formatting routines
-* unit-testing tools, coverage reports, test automation tools
-* a matured file structure for both source code and tests
-* pre-commit configurations and github actions integrated with test automation tools
-* a matured docstring examples, documentation examples, and their generation tool
-
-
 .. start-badges
 
 .. image:: https://img.shields.io/badge/python-3.8-blue
@@ -27,6 +14,18 @@ The project provides below basic dev env tools:
    :target: https://github.com/m0ga0/python-project-template/actions?query=workflow%3Amain-pipeline
 
 .. end-badges
+
+This project is used as a python project / library template. It solves the problem that how we
+can quickly build a new business-oriented python project with modern python management tools or libs.
+The project provides below basic dev env tools:
+
+* python version and virtual env installation and management
+* python dependencies management
+* linting and formatting routines
+* unit-testing tools, coverage reports, test automation tools
+* a matured file structure for both source code and tests
+* pre-commit configurations and github actions integrated with test automation tools
+* a matured docstring examples, documentation examples, and their generation tool
 
 Pre-required installation
 =========================
