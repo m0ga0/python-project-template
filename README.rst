@@ -47,8 +47,10 @@ While pip (already installed, if not, refer to `pip installation <https://pip.py
 a tool to install python packages. We still need a tool to manage python package dependencies for a project.
 `Poetry <https://python-poetry.org/>`_ is a modern python project management and dependencies resolving tool::
 
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
+    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
     poetry --version
+
+PS: don't forget to add poetry bin into your $PATH and ~/.bashrc, more details please follow poetry instructions.
 
 Install tox
 -----------
