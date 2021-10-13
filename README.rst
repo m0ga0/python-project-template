@@ -65,6 +65,12 @@ To trigger linting and formatting, you should install pre-commit::
     pip install pre-commit
     pre-commit install
 
+Install sphinx
+--------------
+You can either user sphinx in poetry env or your local env, if you choose the latter, install sphinx::
+
+    pip install sphinx
+
 (Optional) Install restructuredtext extention for VS code
 ---------------------------------------------------------
 In order to edit reStructuredText documentations, please refer to `reStructuredText extension <https://docs.restructuredtext.net/>`_
