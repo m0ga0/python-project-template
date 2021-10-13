@@ -2,7 +2,7 @@
 Overview
 ========
 
-This project is used as a python project / library template. It solves the problem that how we 
+This project is used as a python project / library template. It solves the problem that how we
 can quickly build a new business-oriented python project with modern python management tools or libs.
 The project provides below basic dev env tools:
 
@@ -34,17 +34,17 @@ We will start to setup some development tools in this section, in order to manag
 
 Install pyenv
 -------------
-pyenv helps setup multiple python versions in the developing system. 
+pyenv helps setup multiple python versions in the developing system.
 
-* If you haven't installed pyenv yet, please refer to 
+* If you haven't installed pyenv yet, please refer to
   `pyenv installation <https://github.com/pyenv/pyenv#installation>`_.
 * If you already have a older version of pyenv, and you want to update it to the latest
   version, please refer to `pyenv-update <https://github.com/pyenv/pyenv-update>`_ tool.
 
 Install poetry
 --------------
-While pip (already installed, if not, refer to `pip installation <https://pip.pypa.io/en/stable/installation/>`_) is 
-a tool to install python packages. We still need a tool to manage python package dependencies for a project. 
+While pip (already installed, if not, refer to `pip installation <https://pip.pypa.io/en/stable/installation/>`_) is
+a tool to install python packages. We still need a tool to manage python package dependencies for a project.
 `Poetry <https://python-poetry.org/>`_ is a modern python project management and dependencies resolving tool::
 
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
@@ -55,6 +55,13 @@ Install tox
 In order to run test env management tool, you need install tox::
 
     pip install tox
+
+Install pre-commit
+------------------
+To trigger linting and formatting, you should install pre-commit::
+
+    pip install pre-commit
+    pre-commit install
 
 (Optional) Install restructuredtext extention for VS code
 ---------------------------------------------------------
@@ -89,7 +96,7 @@ Install a specific python version
 ---------------------------------
 After you decide which python version to use, first install it via pyenv::
 
-    pyenv install 3.8.12    # you can use 
+    pyenv install 3.8.12    # you can use
     pyenv virtualenv 3.8.12 venv-project-x  # define a virtualenv with an installed python version
     pyenv local venv-project-x  # use the virtualenv for current dir
 
@@ -124,14 +131,14 @@ Start edit the new project
 
 Config pyproject.toml
 ---------------------
-pyproject.toml is a project config file managing its version, python version, dev / prod dependencies, 
+pyproject.toml is a project config file managing its version, python version, dev / prod dependencies,
 build system, exposed commands and other configs. Modify this file like below:
 
 .. image:: modify_pyproject_basic_info.jpg
 
 Install dev-dependencies
 ------------------------
-Below command will read the current poetry.lock file in the current directory (or pyproject.toml), 
+Below command will read the current poetry.lock file in the current directory (or pyproject.toml),
 and install all libraries into poetry's own virtualenv::
 
     poetry install
@@ -149,10 +156,10 @@ When developing your own project, add new external libraries using below command
 
     poetry add <new pip package>
 
-When Poetry has finished installing, it writes all of the packages and the exact versions 
-of them that it downloaded to the poetry.lock file, locking the project to those specific 
-versions. You should commit the poetry.lock file to your project repo so that all people 
-working on the project are locked to the same versions of dependencies. (More details: 
+When Poetry has finished installing, it writes all of the packages and the exact versions
+of them that it downloaded to the poetry.lock file, locking the project to those specific
+versions. You should commit the poetry.lock file to your project repo so that all people
+working on the project are locked to the same versions of dependencies. (More details:
 `poetry lock <https://python-poetry.org/docs/basic-usage/#installing-with-poetrylock>`_)
 
 Run tests
@@ -170,14 +177,14 @@ To run simple scripts or unit-tests like pytest in specified virtual env, use be
     poetry run python <your scripts>.py
     poetry run pytest   # run external commands
 
-Poetry will rirst create a virtual env as per your config and dependencies in pyproject.toml, 
+Poetry will rirst create a virtual env as per your config and dependencies in pyproject.toml,
 and then run your scripts.
 
 If you want to run more commands in the your specific developing virtual env, you can type::
 
     poetry shell
-    
-This will start a new shell with the virtual env, and you can run whatever commands you want. 
+
+This will start a new shell with the virtual env, and you can run whatever commands you want.
 (More details: `poetry env <https://python-poetry.org/docs/basic-usage/#using-your-virtual-environment>`_)
 
 Generate coverage report
@@ -186,6 +193,13 @@ If you run tests with tox, you will find coverage report is one of its testenv. 
 coverage report by::
 
     tox -e coverage
+
+Pre-commit check and fox
+------------------------
+When you run ``git commit``, pre-commit hooks will be automatically triggered because we have setup pre-commit-config.yaml file.
+If you want to debug or repro some check failure, you can run below commands::
+
+    pre-commit run --all-files --show-diff-on-failure
 
 Generate documentation
 ----------------------
