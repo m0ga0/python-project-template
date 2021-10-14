@@ -157,6 +157,20 @@ and install all libraries into poetry's own virtualenv::
 
     poetry install
 
+Setup dependencies from private repository
+------------------------------------------
+Please config private package repo and its credential first ( :ref:`config-private-repo` ).
+In order to install packages from this repo, you shoudl edit pyproject.toml::
+
+    [[tool.poetry.source]]
+    name = "<repo-name>"
+    url = "<repo-url>"
+    secondary = true    # Pypi to be primary, while this one be the secondary
+
+or::
+
+    default = true  # only lookup your package in the private repo
+
 Add new dependencies
 --------------------
 When developing your own project, add new external libraries using below command
@@ -175,8 +189,20 @@ versions. You should commit the poetry.lock file to your project repo so that al
 working on the project are locked to the same versions of dependencies. (More details:
 `poetry lock <https://python-poetry.org/docs/basic-usage/#installing-with-poetrylock>`_)
 
-Run tests
----------
+Develop business code
+=====================
+TBD..
+
+
+Write and run tests
+===================
+
+Write unit-tests
+----------------
+TBD..
+
+Run tests with tox
+------------------
 To run through unit-tests in test env management tool like tox, you can do below::
 
     tox
@@ -201,28 +227,18 @@ This will start a new shell with the virtual env, and you can run whatever comma
 (More details: `poetry env <https://python-poetry.org/docs/basic-usage/#using-your-virtual-environment>`_)
 
 Generate coverage report
-------------------------
+========================
 If you run tests with tox, you will find coverage report is one of its testenv. You can generate test
 coverage report by::
 
     tox -e coverage
 
-Pre-commit check and fox
-------------------------
+Pre-commit check and fix
+========================
 When you run ``git commit``, pre-commit hooks will be automatically triggered because we have setup pre-commit-config.yaml file.
 If you want to debug or repro some check failure, you can run below commands::
 
     pre-commit run --all-files --show-diff-on-failure
-
-Generate documentation
-----------------------
-This project use sphinx to generate documentations. Go to docs/source/conf.py, change ``project``, ``author`` and ``release``,
-then you can start write your doc from index.rst. When you've done, run below command to build the docs::
-
-    cd docs
-    poetry run make html
-
-html files will be created in build/ folder. As per how to write a good documentation, please check next section.
 
 Write docs and comments
 =======================
@@ -233,9 +249,57 @@ Use one of below code styles for docstrings:
 
 Use markdown or reStructuredText language for other documentations
 
-Build and deployement
-=====================
-TBD...
+Generate documentation
+======================
+This project use sphinx to generate documentations. Go to docs/source/conf.py, change ``project``, ``author`` and ``release``,
+then you can start write your doc from index.rst. When you've done, run below command to build the docs::
+
+    cd docs
+    poetry run make html
+
+html files will be created in build/ folder. As per how to write a good documentation, please check next section.
+
+Build and publish
+=================
+
+Build sdist and wheel
+---------------------
+Both sdist and wheel are python package distribution types. The difference is:
+
+    * sdist : stands for "source distributions", directly contains all ``.py`` files and a ``setup.py`` file, which is usually
+      in the form of a tarball. However sdist installation requrires the execution of arbitrary code to build the package, thus
+      is slower, more difficult to maintain, a security risk.
+    * wheel: is the standard archive format of pure python code, no ``.pyc`` files, much smaller than sdist, or eggs. And its installation
+      avoids the intermediate step of building packages off of the source distribution.
+      (More details: `Why wheel fast <https://realpython.com/python-wheels/#wheels-make-things-go-fast>`_)
+
+You can build a wheel or a sdist via poetry by::
+
+    poetry build
+
+or::
+
+    poetry build -f wheel
+    poetry build -f sdist
+
+.. _config-private-repo:
+
+Publish to a remote repository
+------------------------------
+To publish to a public repo like Pypi::
+
+    poetry publish
+
+To publish to a private repo, you need to config the private repo first:
+
+    * Add the private repo::
+
+        poetry config repositories.<repo-name> <repo-url>
+
+    * You may need to store repo credential::
+
+        poetry config http-basic.<repo-name> <username> <password>
+
 
 Contribute
 ==========
