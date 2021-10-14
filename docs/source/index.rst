@@ -11,6 +11,7 @@ Welcome to python-project-template's documentation!
    :caption: Table of Contents:
 
    readme
+   changelog
 
 
 
