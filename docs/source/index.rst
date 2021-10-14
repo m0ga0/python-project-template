@@ -8,6 +8,7 @@ Welcome to python-project-template's documentation!
 
 .. toctree::
    :maxdepth: 2
+   :caption: Table of Contents:
 
    readme
 

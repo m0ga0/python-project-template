@@ -140,7 +140,13 @@ Start edit the new project
 Config pyproject.toml
 ---------------------
 pyproject.toml is a project config file managing its version, python version, dev / prod dependencies,
-build system, exposed commands and other configs. Modify this file like below:
+build system, exposed commands and other configs. Modify this file like below::
+
+    [tool.poetry]
+    name = "<your project name>"    # usually a hyphenated name
+    version = "0.1.0"               # this is the version when you finally build the package
+    description = "<your project description"   # detail information of your project
+    authors = ["<authors>"]
 
 .. image:: /_static/modify_pyproject_basic_info.jpg
 
@@ -226,6 +232,10 @@ Use one of below code styles for docstrings:
 * `NumPy style <https://sphinxcontrib-napoleon.readthedocs.io/en/latest/example_numpy.html#example-numpy>`_
 
 Use markdown or reStructuredText language for other documentations
+
+Build and deployement
+=====================
+TBD...
 
 Contribute
 ==========
