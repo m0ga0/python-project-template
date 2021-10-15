@@ -1,6 +1,6 @@
 from unittest.mock import patch
 
-from tox_poetry.python_version_printer import print_python_version
+from python_project_template.python_version_printer import print_python_version
 
 
 @patch("builtins.print")

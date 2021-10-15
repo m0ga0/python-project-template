@@ -1,4 +1,4 @@
-from tox_poetry import __version__
+from python_project_template import __version__
 
 
 def test_version():
