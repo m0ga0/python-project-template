@@ -20,6 +20,7 @@ tests/__pycache__
 
 # docs build folder
 docs/build/*
+docs/source/_build/*
 docs/source/conf.py
 
 # other hidden files/dirs

@@ -15,7 +15,7 @@ Overview
 
 .. end-badges
 
-This project is used as a python project / library template. It solves the problem that how we
+This project is used as a python project / library template. It solves the problem how we
 can quickly build a new business-oriented python project with modern python management tools or libs.
 The project provides below basic dev env tools:
 
@@ -27,18 +27,120 @@ The project provides below basic dev env tools:
 * pre-commit configurations and github actions integrated with test automation tools
 * a matured docstring examples, documentation examples, and their generation tool
 
-Pre-required installation
-=========================
+Create a new project from this template
+=======================================
+Since this project is a repo template, you can use it to create a new python project:
+
+* click "Use this template" button on the top right corner
+* select an account in the owner drop down
+* type the name of your new project repo, choose it's public or private
+* click "repository from template" button.
+
+Git clone the new project repo
+------------------------------
+::
+
+    git clone <project repo>
+
+Source file structure
+---------------------
+You will see in the downloaded folder, we already organize the code structure like below::
+
+    ├─ setup.py
+    ├─ src/
+    |   ├─ mypkg/
+    |       ├─ __init__.py
+    |       ├─ app.py
+    |       ├─ view.py
+    ├─ tests/
+        ├─ __init__.py
+        ├─ foo/
+        |   ├─ __init__.py
+        |   ├─ test_view.py
+        ├─ bar/
+            ├─ __init__.py
+            ├─ test_view.py
+
+We strongly suggest you follow this structure as it helps manage source codes, tests, and docs.
+For example, it allows pytest to load modules whose file names can be the same (in above example both named test_view.py),
+while tools like tox can also test the ``mypkg`` you will later install via ``poetry install``.
+
+Now let's start to change our package / project name through this new code base.
+
+Change root folder's name
+-------------------------
+Go into src folder, change the root folder's name to the project / package name::
+
+    ├─ setup.py
+    ├─ src/
+    |   ├─ <project_name>/
+    |       ├─ __init__.py
+
+
+Config pyproject.toml
+---------------------
+pyproject.toml is a project config file managing its version, python version, dev / prod dependencies,
+build system, exposed commands and other configs. Modify this file like below::
+
+    [tool.poetry]
+    name = "<your project name>"    # usually a hyphenated name
+    version = "0.1.0"               # this is the version when you finally build the package
+    description = "<your project description"   # detail information of your project
+    authors = ["<authors>"]
+
+.. image:: /_static/modify_pyproject_basic_info.jpg
+
+If you has defined scripts containing ``main`` or other methods, you can add it in the ``[tool.poetry.scripts]``
+section of pyproject.toml::
+
+    [tool.poetry.scripts]
+    hello = "<module_path>:main"    # sample: main is the exposed entrypoint of your module
+
+Config .coveragerc
+------------------
+``.coveragerc`` is the config for coverage library, you need to set correct source folder in ``[run]`` section::
+
+    [run]
+    source =
+        ./src/<project_package_folder_name>
+
+.. highlights:: Please be noted that whenever you edit ``pyproject.toml``, please run ``poetry update``
+
+.. _config-sphinx:
+
+Config sphinx config
+--------------------
+Go to ``docs/source/conf.py``, change ``project``, ``author`` and ``release``::
+
+    # -- Project information -----------------------------------------------------
+
+    project = "<project_name>"
+    copyright = "2021, <author>"
+    author = "<author>"
+
+    # The full version, including alpha/beta/rc tags
+    release = "<version>"
+
+Then change ``index.rst``, replace with your own package name.
+
+Setup private repository source for python package
+--------------------------------------------------
+Please config private package repo and its credential first ( :ref:`config-private-repo` ).
+In order to install packages from this repo, you shoudl edit pyproject.toml::
+
+    [[tool.poetry.source]]
+    name = "<repo-name>"
+    url = "<repo-url>"
+    secondary = true    # Pypi to be primary, while this one be the secondary
+
+or::
+
+    default = true  # only lookup your package in the private repo
+
+
+Development environment setup
+=============================
 We will start to setup some development tools in this section, in order to manage a python project.
-
-Install pyenv
--------------
-pyenv helps setup multiple python versions in the developing system.
-
-* If you haven't installed pyenv yet, please refer to
-  `pyenv installation <https://github.com/pyenv/pyenv#installation>`_.
-* If you already have a older version of pyenv, and you want to update it to the latest
-  version, please refer to `pyenv-update <https://github.com/pyenv/pyenv-update>`_ tool.
 
 Install poetry
 --------------
@@ -50,6 +152,38 @@ a tool to install python packages. We still need a tool to manage python package
     poetry --version
 
 PS: don't forget to add poetry bin into your $PATH and ~/.bashrc, more details please follow poetry instructions.
+
+Install pyenv
+-------------
+pyenv helps setup multiple python versions in the developing system.
+
+* If you haven't installed pyenv yet, please refer to
+  `pyenv installation <https://github.com/pyenv/pyenv#installation>`_.
+* If you already have a older version of pyenv, and you want to update it to the latest
+  version, please refer to `pyenv-update <https://github.com/pyenv/pyenv-update>`_ tool.
+
+Install a specific python version
+---------------------------------
+After you decide which python version to use, first install it via pyenv::
+
+    pyenv install --list                    # to show all availabel python version to install
+    pyenv install 3.8.12                    # pick a version to install
+    pyenv virtualenv 3.8.12 venv-project-x  # define a virtualenv with an installed python version
+    pyenv local venv-project-x              # use the virtualenv for current dir
+
+You can test current python version by::
+
+    pyenv version
+
+or::
+
+    python -V
+
+(Optional) Upgrade pip
+----------------------
+::
+
+    pip install --upgrade pip
 
 Install tox
 -----------
@@ -74,102 +208,17 @@ You can either user sphinx in poetry env or your local env, if you choose the la
 ---------------------------------------------------------
 In order to edit reStructuredText documentations, please refer to `reStructuredText extension <https://docs.restructuredtext.net/>`_
 
-Template Usage
-==============
-Source file structure
----------------------
-The strongly suggested you organize your code structure like below::
 
-    ├─ setup.py
-    ├─ src/
-    |   ├─ mypkg/
-    |       ├─ __init__.py
-    |       ├─ app.py
-    |       ├─ view.py
-    ├─ tests/
-        ├─ __init__.py
-        ├─ foo/
-        |   ├─ __init__.py
-        |   ├─ test_view.py
-        ├─ bar/
-            ├─ __init__.py
-            ├─ test_view.py
+Start developing your new project
+=================================
 
-This can allow pytest to load modules whose file name can be the same (in above example both named test_view.py), meanwhile
-tools like tox will only test the mypkg you installed via ``poetry install``.
-
-
-Install a specific python version
----------------------------------
-After you decide which python version to use, first install it via pyenv::
-
-    pyenv install --list                    # to show all availabel python version to install
-    pyenv install 3.8.12                    # pick a version to install
-    pyenv virtualenv 3.8.12 venv-project-x  # define a virtualenv with an installed python version
-    pyenv local venv-project-x              # use the virtualenv for current dir
-
-You can test current python version by::
-
-    pyenv version
-
-or::
-
-    python -V
-
-Upgrade pip
------------
-::
-
-    pip install --upgrade pip
-
-Create a new project from this template
-----------------------------------------
-Since this project is a repo template, you can use it to create a new python project:
-
-* click "Use this template" button on the top right corner
-* select an account in the owner drop down
-* type the name of your new project repo, choose it's public or private
-* click "repository from template" button.
-
-Start edit the new project
---------------------------
-::
-
-    git clone <project repo>
-
-Config pyproject.toml
----------------------
-pyproject.toml is a project config file managing its version, python version, dev / prod dependencies,
-build system, exposed commands and other configs. Modify this file like below::
-
-    [tool.poetry]
-    name = "<your project name>"    # usually a hyphenated name
-    version = "0.1.0"               # this is the version when you finally build the package
-    description = "<your project description"   # detail information of your project
-    authors = ["<authors>"]
-
-.. image:: /_static/modify_pyproject_basic_info.jpg
-
-Install dev-dependencies
+Install all dependencies
 ------------------------
 Below command will read the current poetry.lock file in the current directory (or pyproject.toml),
 and install all libraries into poetry's own virtualenv::
 
     poetry install
 
-Setup dependencies from private repository
-------------------------------------------
-Please config private package repo and its credential first ( :ref:`config-private-repo` ).
-In order to install packages from this repo, you shoudl edit pyproject.toml::
-
-    [[tool.poetry.source]]
-    name = "<repo-name>"
-    url = "<repo-url>"
-    secondary = true    # Pypi to be primary, while this one be the secondary
-
-or::
-
-    default = true  # only lookup your package in the private repo
 
 Add new dependencies
 --------------------
@@ -189,8 +238,14 @@ versions. You should commit the poetry.lock file to your project repo so that al
 working on the project are locked to the same versions of dependencies. (More details:
 `poetry lock <https://python-poetry.org/docs/basic-usage/#installing-with-poetrylock>`_)
 
+Optionally, if you manually change any configs in ``pyproject.toml``, you can update
+and lock/pinning dependencies like below::
+
+    poetry update   # update dependencies version, and lock them
+    poetry lock     # only lock current pypi package versions
+
 Develop business code
-=====================
+---------------------
 TBD..
 
 
@@ -249,9 +304,9 @@ Use one of below code styles for docstrings:
 
 Use markdown or reStructuredText language for other documentations
 
-Generate documentation
-======================
-This project use sphinx to generate documentations. Go to docs/source/conf.py, change ``project``, ``author`` and ``release``,
+Generate documentation with sphinx
+==================================
+This project use sphinx to generate documentations. For configuration, please check :ref:`config-sphinx`.
 then you can start write your doc from index.rst. When you've done, run below command to build the docs::
 
     cd docs
@@ -259,8 +314,8 @@ then you can start write your doc from index.rst. When you've done, run below co
 
 html files will be created in build/ folder. As per how to write a good documentation, please check next section.
 
-Build and publish
-=================
+Build and publish package
+=========================
 
 Build sdist and wheel
 ---------------------
