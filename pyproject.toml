@@ -26,7 +26,7 @@ url = "https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple/"
 default = true
 
 [tool.poetry.scripts]
-hello = "tox_poetry.hello_world:main"
+hello = "python_project_template.hello_world:main"
 
 [tool.black]
 line-length = 88

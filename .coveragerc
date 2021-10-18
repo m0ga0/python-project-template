@@ -1,6 +1,6 @@
 [run]
 source =
-    ./src/tox_poetry
+    ./src/python_project_template
 
 [report]
 omit =
