@@ -16,20 +16,21 @@ Overview
 .. end-badges
 
 This project is used as a python project / library template. It solves the problem how we
-can quickly build a new business-oriented python project with modern python management tools or libs.
-The project provides below basic dev env tools:
+can quickly setup a new business-oriented python project with modern management tools and libraries.
 
-* python version and virtual env installation and management
+This project provides below tools:
+
+* python version and virtual environment management
 * python dependencies management
-* linting and formatting routines
-* unit-testing tools, coverage reports, test automation tools
-* a matured file structure for both source code and tests
-* pre-commit configurations and github actions integrated with test automation tools
-* a matured docstring examples, documentation examples, and their generation tool
+* linters and formatters
+* unit-testing, test env automation, and coverage reports
+* a organized file structure for both source code and tests
+* pre-commit configurations and github actions configs
+* a matured docstring, documentation examples, and generation tool
 
 Create a new project from this template
 =======================================
-Since this project is a repo template, you can use it to create a new python project:
+Since this is a github repo template, you can use it to create a new python project:
 
 * click "Use this template" button on the top right corner
 * select an account in the owner drop down
@@ -40,11 +41,11 @@ Git clone the new project repo
 ------------------------------
 ::
 
-    git clone <project repo>
+    git clone <the new project repo url>
 
 Source file structure
 ---------------------
-You will see in the downloaded folder, we already organize the code structure like below::
+In the downloaded repo folder, we've already organized the code structure as below::
 
     ├─ setup.py
     ├─ src/
@@ -65,11 +66,11 @@ We strongly suggest you follow this structure as it helps manage source codes, t
 For example, it allows pytest to load modules whose file names can be the same (in above example both named test_view.py),
 while tools like tox can also test the ``mypkg`` you will later install via ``poetry install``.
 
-Now let's start to change our package / project name through this new code base.
+Now let's start to change our package / project name through out this new code base.
 
 Change root folder's name
 -------------------------
-Go into src folder, change the root folder's name to the project / package name::
+Go into ``src`` folder, change the root folder's name to the project / package name::
 
     ├─ setup.py
     ├─ src/
@@ -79,8 +80,9 @@ Go into src folder, change the root folder's name to the project / package name:
 
 Config pyproject.toml
 ---------------------
-pyproject.toml is a project config file managing its version, python version, dev / prod dependencies,
-build system, exposed commands and other configs. Modify this file like below::
+``pyproject.toml`` is a project config file managing version, dev / prod dependencies,
+build system, exposed commands and other configs.
+Modify this file as below::
 
     [tool.poetry]
     name = "<your project name>"    # usually a hyphenated name
@@ -90,8 +92,8 @@ build system, exposed commands and other configs. Modify this file like below::
 
 .. image:: /_static/modify_pyproject_basic_info.jpg
 
-If you has defined scripts containing ``main`` or other methods, you can add it in the ``[tool.poetry.scripts]``
-section of pyproject.toml::
+If you have defined scripts containing ``main`` or other methods, you can add it in the ``[tool.poetry.scripts]``
+section of ``pyproject.toml``::
 
     [tool.poetry.scripts]
     hello = "<module_path>:main"    # sample: main is the exposed entrypoint of your module
@@ -126,7 +128,7 @@ Then change ``index.rst``, replace with your own package name.
 Setup private repository source for python package
 --------------------------------------------------
 Please config private package repo and its credential first ( :ref:`config-private-repo` ).
-In order to install packages from this repo, you shoudl edit pyproject.toml::
+In order to install packages from this repo, you should edit ``pyproject.toml``::
 
     [[tool.poetry.source]]
     name = "<repo-name>"
@@ -140,18 +142,19 @@ or::
 
 Development environment setup
 =============================
-We will start to setup some development tools in this section, in order to manage a python project.
+Now let's start setting up dev tools.
 
 Install poetry
 --------------
-While pip (already installed, if not, refer to `pip installation <https://pip.pypa.io/en/stable/installation/>`_) is
-a tool to install python packages. We still need a tool to manage python package dependencies for a project.
-`Poetry <https://python-poetry.org/>`_ is a modern python project management and dependencies resolving tool::
+While pip is a tool to install python packages. We still need a tool to manage python package dependencies.
+`Poetry <https://python-poetry.org/>`_ is a modern python project management and dependencies resolving tool,
+let's install it::
 
     curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/install-poetry.py | python -
     poetry --version
 
-PS: don't forget to add poetry bin into your $PATH and ~/.bashrc, more details please follow poetry instructions.
+PS: Don't forget to add poetry bin into your $PATH and ~/.bashrc, more details please follow
+`poetry instructions <https://python-poetry.org/docs/master/#osx--linux--bashonwindows-install-instructions>`_.
 
 Install pyenv
 -------------
@@ -169,9 +172,10 @@ After you decide which python version to use, first install it via pyenv::
     pyenv install --list                    # to show all availabel python version to install
     pyenv install 3.8.12                    # pick a version to install
     pyenv virtualenv 3.8.12 venv-project-x  # define a virtualenv with an installed python version
+    cd <project folder>                     # go into the project folder, use venv there
     pyenv local venv-project-x              # use the virtualenv for current dir
 
-You can test current python version by::
+After activate the virtualenv, you can test current python version by::
 
     pyenv version
 
@@ -179,9 +183,12 @@ or::
 
     python -V
 
-(Optional) Upgrade pip
-----------------------
-::
+(Optional) Install / Upgrade pip
+--------------------------------
+Usually when you setup a python venv with pyenv, you should have a pip in it.
+(if not, refer to `pip installation <https://pip.pypa.io/en/stable/installation/>`_)
+
+Sometimes pip may be out-of-date, and warning keeps raising, update it::
 
     pip install --upgrade pip
 
@@ -310,9 +317,9 @@ This project use sphinx to generate documentations. For configuration, please ch
 then you can start write your doc from index.rst. When you've done, run below command to build the docs::
 
     cd docs
-    poetry run make html
+    make html
 
-html files will be created in build/ folder. As per how to write a good documentation, please check next section.
+html files will be created in ``build/`` folder. As per how to write a good documentation, please check next section.
 
 Build and publish package
 =========================
