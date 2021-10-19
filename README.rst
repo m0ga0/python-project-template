@@ -226,6 +226,13 @@ and install all libraries into poetry's own virtualenv::
 
     poetry install
 
+If you unfortunately meet error "ModuleNotFoundError: No module named 'keyring.backends.macOS'", you can
+create the file ``~/.config/python_keyring/keyringrc.cfg`` with the following content
+(More details `keyring error <https://github.com/python-poetry/poetry/issues/3662>`_)::
+
+    [backend]
+    default-keyring=keyring.backends.SecretService.Keyring
+
 
 Add new dependencies
 --------------------
