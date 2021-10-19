@@ -81,8 +81,14 @@ Go into ``src`` folder, change the root folder's name to the project / package n
 Config pyproject.toml
 ---------------------
 ``pyproject.toml`` is a project config file managing version, dev / prod dependencies,
-build system, exposed commands and other configs.
-Modify this file as below::
+build system, exposed commands and other configs. If you want to create this file from scratch, remove the
+existing one, and type below command::
+
+    poetry init
+
+This will guide you to set up project settings step by step.
+
+Or you can just modify this file as below::
 
     [tool.poetry]
     name = "<your project name>"    # usually a hyphenated name
@@ -236,7 +242,7 @@ create the file ``~/.config/python_keyring/keyringrc.cfg`` with the following co
 
 Add new dependencies
 --------------------
-When developing your own project, add new external libraries using below command
+When developing your own project, add new third-party libraries using below command
 
 * If you want to add *develop* dependencies::
 
@@ -257,6 +263,11 @@ and lock/pinning dependencies like below::
 
     poetry update   # update dependencies version, and lock them
     poetry lock     # only lock current pypi package versions
+
+If you use pip and requirements.txt previously, you can use `dephell <https://github.com/dephell/dephell>`_
+to convert format to poetry::
+
+    dephell deps convert --from-format=pip --to-format=poetry
 
 Develop business code
 ---------------------
