@@ -30,18 +30,19 @@ This project provides below tools:
 
 Create a new project from this template
 =======================================
-Since this is a github repo template, you can use it to create a new python project:
+Since this is a github repo template, you can use it to create a new python project project-X:
 
 * click "Use this template" button on the top right corner
 * select an account in the owner drop down
 * type the name of your new project repo, choose it's public or private
 * click "repository from template" button.
 
-Git clone the new project repo
-------------------------------
+
+Git clone project-X repo
+------------------------
 ::
 
-    git clone <the new project repo url>
+    git clone <project-X repo url>
 
 Source file structure
 ---------------------
@@ -49,7 +50,7 @@ In the downloaded repo folder, we've already organized the code structure as bel
 
     ├─ setup.py
     ├─ src/
-    |   ├─ mypkg/
+    |   ├─ <project_name>/
     |       ├─ __init__.py
     |       ├─ app.py
     |       ├─ view.py
@@ -64,17 +65,17 @@ In the downloaded repo folder, we've already organized the code structure as bel
 
 We strongly suggest you follow this structure as it helps manage source codes, tests, and docs.
 For example, it allows pytest to load modules whose file names can be the same (in above example both named test_view.py),
-while tools like tox can also test the ``mypkg`` you will later install via ``poetry install``.
+while tools like tox can also test the ``project_name`` you will later install via ``poetry install``.
 
 Now let's start to change our package / project name through out this new code base.
 
 Change root folder's name
 -------------------------
-Go into ``src`` folder, change the root folder's name to the project / package name::
+Go into ``src`` folder, change the root folder's name to project-X::
 
     ├─ setup.py
     ├─ src/
-    |   ├─ <project_name>/
+    |   ├─ project_x/
     |       ├─ __init__.py
 
 
@@ -91,8 +92,8 @@ This will guide you to set up project settings step by step.
 Or you can just modify this file as below::
 
     [tool.poetry]
-    name = "<your project name>"    # usually a hyphenated name
-    version = "0.1.0"               # this is the version when you finally build the package
+    name = "project-X"                          # usually a hyphenated name
+    version = "0.1.0"                           # this is the version when you finally build the package
     description = "<your project description"   # detail information of your project
     authors = ["<authors>"]
 
@@ -110,7 +111,7 @@ Config .coveragerc
 
     [run]
     source =
-        ./src/<project_package_folder_name>
+        ./src/project_x
 
 .. highlights:: Please be noted that whenever you edit ``pyproject.toml``, please run ``poetry update``
 
@@ -122,8 +123,8 @@ Go to ``docs/source/conf.py``, change ``project``, ``author`` and ``release``::
 
     # -- Project information -----------------------------------------------------
 
-    project = "<project_name>"
-    copyright = "2021, <author>"
+    project = "project-X"
+    copyright = "2021, <author>"    # replace <author> with your name
     author = "<author>"
 
     # The full version, including alpha/beta/rc tags
@@ -137,8 +138,8 @@ Please config private package repo and its credential first ( :ref:`config-priva
 In order to install packages from this repo, you should edit ``pyproject.toml``::
 
     [[tool.poetry.source]]
-    name = "<repo-name>"
-    url = "<repo-url>"
+    name = "<pypi-repo-name>"
+    url = "<pypi-repo-url>"
     secondary = true    # Pypi to be primary, while this one be the secondary
 
 or::
