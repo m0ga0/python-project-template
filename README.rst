@@ -160,7 +160,9 @@ let's install it::
     poetry --version
 
 PS: Don't forget to add poetry bin into your $PATH and ~/.bashrc, more details please follow
-`poetry instructions <https://python-poetry.org/docs/master/#osx--linux--bashonwindows-install-instructions>`_.
+`poetry instructions <https://python-poetry.org/docs/master/#osx--linux--bashonwindows-install-instructions>`_::
+
+    export PATH=":$HOME/.poetry/bin:$PATH"
 
 Install pyenv
 -------------
